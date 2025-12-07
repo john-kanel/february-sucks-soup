@@ -581,7 +581,11 @@ main {
 @media (max-width: 768px) {
   .site-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+  }
+
+  .brand {
+    text-align: center;
   }
 
   .year-tabs {
