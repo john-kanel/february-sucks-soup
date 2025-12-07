@@ -149,12 +149,15 @@ main {
 }
 
 .year-tabs {
-  display: flex;
+  display: flex !important;
   gap: 0.75rem;
   flex-wrap: wrap;
+  visibility: visible !important;
 }
 
 .tab {
+  display: inline-block !important;
+  visibility: visible !important;
   border: 2px solid transparent;
   background: rgb(255, 255, 255);
   color: var(--sky-powder);
@@ -165,6 +168,9 @@ main {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
   box-shadow: 0 8px 20px rgba(3, 5, 19, 0.4);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .tab.active {
