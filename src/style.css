@@ -262,10 +262,11 @@ main {
 }
 
 .hero-details article {
-  background: rgba(255, 255, 255, 0.06);
+  background: #ffffff;
   border-radius: 18px;
   padding: 1.25rem 1.45rem;
-  border: 2px dashed rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(15, 58, 98, 0.08);
+  box-shadow: 0 10px 24px rgba(14, 58, 98, 0.08);
 }
 
 .hero-details h3 {
