@@ -22,10 +22,13 @@ Remember: hydrate between ladles!`;
 let tabs = [];
 let yearStages = [];
 let homeFlow = null;
+let yearsToggle = null;
+let yearsMenu = null;
 
 window.addEventListener('DOMContentLoaded', () => {
   cacheDom();
   wireTabs();
+  wireDropdown();
   wireHomeTriggers();
   wireCtas();
   showHome();
@@ -35,6 +38,8 @@ function cacheDom() {
   tabs = Array.from(document.querySelectorAll('[data-tab]'));
   yearStages = Array.from(document.querySelectorAll('.year-stage'));
   homeFlow = document.querySelector('[data-home-view]');
+  yearsToggle = document.querySelector('.years-toggle');
+  yearsMenu = document.querySelector('.years-menu');
 }
 
 function wireTabs() {
@@ -42,8 +47,42 @@ function wireTabs() {
     tab.addEventListener('click', () => {
       const year = tab.dataset.tab;
       showYear(year);
+      closeDropdown();
     });
   });
+}
+
+function wireDropdown() {
+  if (!yearsToggle || !yearsMenu) return;
+
+  yearsToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isExpanded = yearsToggle.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      closeDropdown();
+    } else {
+      openDropdown();
+    }
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!yearsMenu.contains(e.target) && e.target !== yearsToggle) {
+      closeDropdown();
+    }
+  });
+}
+
+function openDropdown() {
+  if (!yearsToggle || !yearsMenu) return;
+  yearsToggle.setAttribute('aria-expanded', 'true');
+  yearsMenu.removeAttribute('hidden');
+}
+
+function closeDropdown() {
+  if (!yearsToggle || !yearsMenu) return;
+  yearsToggle.setAttribute('aria-expanded', 'false');
+  yearsMenu.setAttribute('hidden', 'hidden');
 }
 
 function wireHomeTriggers() {

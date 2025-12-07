@@ -31,38 +31,40 @@
       <button class="brand" type="button" data-home-trigger>
         <h1>February Sucks Soup</h1>
       </button>
-      <nav class="year-tabs" role="tablist" aria-label="Soup year galleries">
-        <button
-          class="tab"
-          type="button"
-          role="tab"
-          aria-selected="false"
-          aria-controls="panel-2024"
-          data-tab="2024"
-        >
-          2024
+      <div class="years-dropdown">
+        <button class="years-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+          Years
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dropdown-icon">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
         </button>
-        <button
-          class="tab"
-          type="button"
-          role="tab"
-          aria-selected="false"
-          aria-controls="panel-2025"
-          data-tab="2025"
-        >
-          2025
-        </button>
-        <button
-          class="tab"
-          type="button"
-          role="tab"
-          aria-selected="false"
-          aria-controls="panel-2026"
-          data-tab="2026"
-        >
-          2026
-        </button>
-      </nav>
+        <nav class="years-menu" role="menu" aria-label="Soup year galleries" hidden>
+          <button
+            class="year-option"
+            type="button"
+            role="menuitem"
+            data-tab="2024"
+          >
+            2024
+          </button>
+          <button
+            class="year-option"
+            type="button"
+            role="menuitem"
+            data-tab="2025"
+          >
+            2025
+          </button>
+          <button
+            class="year-option"
+            type="button"
+            role="menuitem"
+            data-tab="2026"
+          >
+            2026
+          </button>
+        </nav>
+      </div>
     </header>
 
     <main id="home">
