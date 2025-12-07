@@ -119,13 +119,13 @@ main {
 
 .brand {
   border: none;
-  background: #ffffff;
-  padding: 1rem 1.5rem;
+  background: white;
+  padding: 1rem 1.75rem;
   text-align: left;
   color: inherit;
   cursor: pointer;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(14, 58, 98, 0.1);
+  box-shadow: 0 4px 16px rgba(15, 58, 98, 0.15);
 }
 
 .brand:focus-visible {
@@ -155,19 +155,24 @@ main {
 }
 
 .tab {
-  border: 2px solid #0f3a62;
-  background: white;
-  color: #0f3a62;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1rem;
+  border: 2px solid transparent;
+  background: rgb(255, 255, 255);
+  color: var(--sky-powder);
+  padding: 0.65rem 1.6rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+  box-shadow: 0 8px 20px rgba(3, 5, 19, 0.4);
 }
 
 .tab.active {
-  background: #0f3a62;
-  color: white;
+  border-color: var(--sky-honey);
+  color: var(--ink);
+  background: linear-gradient(130deg, var(--sky-honey), var(--sky-berry));
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
 }
 
 .hero {
@@ -576,11 +581,7 @@ main {
 @media (max-width: 768px) {
   .site-header {
     flex-direction: column;
-    align-items: center;
-  }
-
-  .brand {
-    text-align: center;
+    align-items: flex-start;
   }
 
   .year-tabs {
