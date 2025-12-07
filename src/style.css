@@ -40,58 +40,13 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url('/snowflake.png'), url('/snowflake.png');
-  background-size: 37.44px 37.44px, 58.24px 58.24px;
-  background-position: 10% 20%, 70% 60%;
-  opacity: 0.16;
-  animation: drift 32s linear infinite;
+  background-image: url('/snowflake.png');
+  background-size: 100px 100px;
+  background-repeat: repeat;
+  background-position: 0 0;
+  opacity: 0.15;
   pointer-events: none;
   z-index: -2;
-  filter: brightness(0.65);
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url('/snowflake.png'), url('/snowflake.png');
-  background-size: 24.96px 24.96px, 49.92px 49.92px;
-  background-position: 30% 80%, 85% 15%;
-  opacity: 0.11;
-  animation: driftSlow 50s linear infinite;
-  pointer-events: none;
-  z-index: -3;
-  filter: brightness(0.55);
-}
-
-@keyframes drift {
-  from {
-    transform: translateY(-3%);
-  }
-  to {
-    transform: translateY(3%);
-  }
-}
-
-@keyframes driftSlow {
-  from {
-    transform: translateY(3%);
-  }
-  to {
-    transform: translateY(-3%);
-  }
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  width: 80vmin;
-  height: 80vmin;
-  bottom: -30vmin;
-  right: -25vmin;
-  background: radial-gradient(circle, rgba(255, 132, 170, 0.45), transparent 60%);
-  filter: blur(20px);
-  z-index: -3;
 }
 
 main {
