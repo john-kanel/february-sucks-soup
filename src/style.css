@@ -156,6 +156,12 @@ main {
   visibility: visible !important;
 }
 
+/* Force-hide any native selects that Safari might render/collapse for the year tabs */
+.site-header select {
+  display: none !important;
+  visibility: hidden !important;
+}
+
 .tab {
   display: inline-flex !important;
   align-items: center;
