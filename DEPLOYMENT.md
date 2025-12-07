@@ -8,12 +8,16 @@ Create a `.env` file (use `env.example` as a reference) with:
 RECAPTCHA_SECRET=your-google-secret
 UPLOAD_DIR=./uploads           # optional, defaults to ./uploads
 DATA_DIR=./data                # optional, defaults to ./data
+RESEND_API_KEY=your-resend-api-key
+RESEND_FROM="Soup Party RSVP <no-reply@febsucksoup.com>"
 PORT=4000                      # optional
 ```
 
 - **RECAPTCHA_SECRET** is the secret key Google gave you. Do not commit it.
 - **UPLOAD_DIR** points to the mounted Railway volume path (see below).
 - **DATA_DIR** stores RSVP submissions (JSON). Use the same volume or a second volume.
+- **RESEND_API_KEY** is your Resend secret used by the backend to send RSVP emails.
+- **RESEND_FROM** is the from-address Resend will use (must be verified in Resend).
 
 ## Local development
 

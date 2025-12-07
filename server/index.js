@@ -4,6 +4,7 @@ const fsPromises = require('fs/promises');
 const express = require('express');
 const multer = require('multer');
 const dotenv = require('dotenv');
+const { Resend } = require('resend');
 
 dotenv.config();
 
@@ -16,6 +17,10 @@ const DATA_ROOT = process.env.DATA_DIR || path.join(__dirname, '../data');
 const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET;
 const RSVP_FILE = path.join(DATA_ROOT, 'rsvps.json');
 const RSVP_RECIPIENTS = ['john.kanel@hey.com', 'Brockword@yahoo.com'];
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const RESEND_FROM =
+  process.env.RESEND_FROM || 'Soup Party RSVP <no-reply@febsucksoup.com>';
+const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 
 fs.mkdirSync(UPLOAD_ROOT, { recursive: true });
 fs.mkdirSync(DATA_ROOT, { recursive: true });
@@ -272,7 +277,7 @@ async function sendRsvpEmail(list, latest) {
         `${idx + 1}. ${entry.name} — ${entry.soup} (party of ${entry.guests})`
     )
     .join('\n');
-  const body = `
+  const text = `
 New RSVP from ${latest.name}
 Soup: ${latest.soup}
 Guests: ${latest.guests}
@@ -282,11 +287,42 @@ Current roster:
 ${rows}
 `;
 
-  console.log('---- RSVP EMAIL (placeholder) ----');
-  console.log('To:', RSVP_RECIPIENTS.join(', '));
-  console.log('Subject:', subject);
-  console.log(body);
-  console.log('---- END RSVP EMAIL ----');
+  const htmlRows = list
+    .map(
+      (entry, idx) =>
+        `<li><strong>${idx + 1}.</strong> ${entry.name} — ${entry.soup} (party of ${entry.guests})</li>`
+    )
+    .join('');
+
+  const html = `
+    <h2>New RSVP: ${latest.name}</h2>
+    <p><strong>Soup:</strong> ${latest.soup}<br/>
+    <strong>Guests:</strong> ${latest.guests}<br/>
+    <strong>Submitted:</strong> ${new Date(latest.submittedAt).toLocaleString()}</p>
+    <h3>Current roster</h3>
+    <ul>${htmlRows}</ul>
+  `;
+
+  if (!resend) {
+    console.log('---- RSVP EMAIL (no Resend API key configured) ----');
+    console.log('To:', RSVP_RECIPIENTS.join(', '));
+    console.log('Subject:', subject);
+    console.log(text);
+    console.log('---- END RSVP EMAIL ----');
+    return;
+  }
+
+  try {
+    await resend.emails.send({
+      from: RESEND_FROM,
+      to: RSVP_RECIPIENTS,
+      subject,
+      text,
+      html
+    });
+  } catch (error) {
+    console.error('Failed to send RSVP email via Resend', error);
+  }
 }
 
 
