@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/soup.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RSVP | February Sucks Soup</title>
+    <meta
+      name="description"
+      content="RSVP for the February Sucks Soup party and tell us what you'll be serving."
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="module" src="/src/form.js"></script>
+  </head>
+  <body>
+    <div class="snow-overlay" aria-hidden="true">
+      <div class="snow-layer"></div>
+      <div class="snow-layer delay"></div>
+    </div>
+
+    <header class="site-header">
+      <button class="brand" type="button" onclick="window.location.href='/'">
+        <h1>February Sucks Soup</h1>
+      </button>
+    </header>
+
+    <main class="form-layout">
+      <section class="form-card">
+        <p class="eyebrow">RSVP</p>
+        <h2>Tell us your soup plan</h2>
+        <p>
+          Share who’s coming and which soup you’re bringing so we can prep enough spoons
+          (and handle duplicate recipes like pros).
+        </p>
+
+        <form id="soup-form">
+          <label>
+            Name
+            <input type="text" name="name" required placeholder="Your name" />
+          </label>
+
+          <label>
+            Number attending
+            <input
+              type="number"
+              name="guests"
+              min="1"
+              required
+              placeholder="How many people?"
+            />
+          </label>
+
+          <label>
+            Soup you’re bringing
+            <input
+              type="text"
+              name="soup"
+              required
+              placeholder="e.g. Smoky Maple Bisque"
+            />
+          </label>
+
+          <button type="submit" class="primary-cta form-submit">
+            Submit RSVP
+          </button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2025 February Sucks Soup. Built with ladles of love.</p>
+    </footer>
+  </body>
+</html>
+

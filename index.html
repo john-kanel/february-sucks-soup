@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/soup.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>February Sucks Soup</title>
+    <meta
+      name="description"
+      content="A winter party landing page for the annual February Sucks Soup showdown."
+    />
+    <meta property="og:title" content="February Sucks Soup Party" />
+    <meta
+      property="og:description"
+      content="3rd Annual February Sucks Soup – bring a pot, win a prize!"
+    />
+    <meta property="og:image" content="/Web Banners-3.png" />
+    <meta property="og:type" content="website" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <span class="sr-only" id="snow-desc"
+      >Subtle animated snow drifting across a gradient night sky.</span
+    >
+    <div class="snow-overlay" aria-describedby="snow-desc" aria-hidden="true">
+      <div class="snow-layer"></div>
+      <div class="snow-layer delay"></div>
+    </div>
+
+    <header class="site-header">
+      <button class="brand" type="button" data-home-trigger>
+        <h1>February Sucks Soup</h1>
+      </button>
+      <nav class="year-tabs" role="tablist" aria-label="Soup year galleries">
+        <button
+          class="tab"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-2024"
+          data-tab="2024"
+        >
+          2024
+        </button>
+        <button
+          class="tab"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-2025"
+          data-tab="2025"
+        >
+          2025
+        </button>
+        <button
+          class="tab"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-2026"
+          data-tab="2026"
+        >
+          2026
+        </button>
+      </nav>
+    </header>
+
+    <main id="home">
+      <div class="home-flow" data-home-view>
+        <section class="hero">
+          <div class="hero-invite">
+            <img
+              src="/Soup Party Invite-5.png"
+              alt="3rd Annual February Sucks Soup invitation flyer"
+            />
+          </div>
+
+          <div class="hero-stack">
+            <div class="hero-content">
+              <p class="tagline">
+                Combat your seasonal depression with the best soup party Lincoln has to offer.
+              </p>
+              <h2>2026 Party &mdash; February date TBD</h2>
+              <p class="lede">
+                Crockpots. Crackers. Conversation. And more! Get ready for the 3rd Annual
+                February Sucks Soup Party.
+              </p>
+              <div class="hero-details">
+                <article>
+                  <h3>What to bring</h3>
+                  <ul>
+                    <li>Your signature soup or bread pairing</li>
+                    <li>All of your friends &mdash; open invite!</li>
+                    <li>Your party pants 👖 cuz it's gonna be a blast</li>
+                  </ul>
+                </article>
+                <article>
+                  <h3>House perks</h3>
+                  <ul>
+                    <li>Bowls, spoons, napkins, etc.</li>
+                    <li>Hot cider + cocoa bar</li>
+                    <li>The 1st place trophy for the most delicious soup</li>
+                  </ul>
+                </article>
+              </div>
+              <p class="rsvp-prompt">
+                What soup are you bringing? Let us know here!
+              </p>
+              <a class="primary-cta rsvp-link" href="/form" target="_self">
+                Share your soup
+              </a>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="recap-card">
+          <p class="card-eyebrow">2024 Recap</p>
+          <h3>The Best Soup Showdown</h3>
+          <ul>
+            <li><span>Current Champ:</span> Lasagna Soup by Kayma Carpenter</li>
+            <li><span>Worst Soup:</span> "Sloup" by the Men of the Sem 😉</li>
+            <li><span>Highlights:</span> Secret Hitler in the Garage 🎲</li>
+            <li><span>Party Favor:</span> Custom coasters</li>
+          </ul>
+        </section>
+
+        <!--
+        <section class="itinerary">
+          <header>
+            <h2>Keep February playful</h2>
+            <p>
+              We theme every corner: a chalet bar, a simmer lab, and a compliment
+              corner. Proof that winter weekends can feel like a storybook.
+            </p>
+          </header>
+          <div class="timeline">
+            <article>
+              <h3>Doors & Warm Up</h3>
+              <p>Hot cider pour-over, mittens valet, communal soup potluck set.</p>
+            </article>
+            <article>
+              <h3>Sip + Score</h3>
+              <p>Guided tastings with playlists ranging from dream pop to disco.</p>
+            </article>
+            <article>
+              <h3>Story Hour</h3>
+              <p>Guests roast winter blues with tiny monologues + soup riddles.</p>
+            </article>
+            <article>
+              <h3>Final Ladle</h3>
+              <p>Winners crowned, recipe swaps, late-night broth for the road.</p>
+            </article>
+          </div>
+        </section>
+        -->
+
+      </div>
+
+      <section
+        class="year-stage"
+        id="panel-2024"
+        data-year="2024"
+        role="tabpanel"
+        aria-hidden="true"
+      >
+        <button class="back-home" type="button" data-back-home>
+          ← Back to party details
+        </button>
+        <header>
+          <p class="eyebrow">Gallery 2024</p>
+          <h2>Legendary 2024 ladles</h2>
+          <p>
+            Crowd-sourced snapshots now live in a shared Google Photos album. Tap to view
+            the full 2024 set without worrying about uploads.
+          </p>
+        </header>
+        <div class="album-card">
+          <div class="album-embed">
+            <iframe
+              src="https://photos.google.com/share/YOUR_2024_ALBUM_LINK?key=EXAMPLE&embed=1"
+              title="2024 Google Photos album"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <a
+            class="album-link"
+            href="https://photos.google.com/share/YOUR_2024_ALBUM_LINK"
+            target="_blank"
+            rel="noopener"
+          >
+            Open 2024 album in Google Photos
+          </a>
+          <p class="helper-text">
+            Replace the placeholder link above with your public 2024 album URL.
+          </p>
+        </div>
+      </section>
+
+      <section
+        class="year-stage"
+        id="panel-2025"
+        data-year="2025"
+        role="tabpanel"
+        aria-hidden="true"
+      >
+        <button class="back-home" type="button" data-back-home>
+          ← Back to party details
+        </button>
+        <header>
+          <p class="eyebrow">Gallery 2025</p>
+          <h2>2025 prep + planning shenanigans</h2>
+          <p>
+            Share rehearsal soups, test toppings, or behind-the-scenes winter hangs via
+            the Google Photos album link.
+          </p>
+        </header>
+        <div class="album-card">
+          <div class="album-embed">
+            <iframe
+              src="https://photos.google.com/share/YOUR_2025_ALBUM_LINK?key=EXAMPLE&embed=1"
+              title="2025 Google Photos album"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <a
+            class="album-link"
+            href="https://photos.google.com/share/YOUR_2025_ALBUM_LINK"
+            target="_blank"
+            rel="noopener"
+          >
+            Open 2025 album in Google Photos
+          </a>
+          <p class="helper-text">
+            Update this link with your public 2025 album share URL when ready.
+          </p>
+        </div>
+      </section>
+
+      <section
+        class="year-stage"
+        id="panel-2026"
+        data-year="2026"
+        role="tabpanel"
+        aria-hidden="true"
+      >
+        <button class="back-home" type="button" data-back-home>
+          ← Back to party details
+        </button>
+        <header>
+          <p class="eyebrow">Gallery 2026</p>
+          <h2>Future mood boards + entry teases</h2>
+          <p>
+            Drop inspiration pics, poster drafts, or early kitchen experiments into the
+            Google Photos album so everyone can peek at upcoming entries.
+          </p>
+        </header>
+        <div class="album-card">
+          <div class="album-embed">
+            <iframe
+              src="https://photos.google.com/share/YOUR_2026_ALBUM_LINK?key=EXAMPLE&embed=1"
+              title="2026 Google Photos album"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <a
+            class="album-link"
+            href="https://photos.google.com/share/YOUR_2026_ALBUM_LINK"
+            target="_blank"
+            rel="noopener"
+          >
+            Open 2026 album in Google Photos
+          </a>
+          <p class="helper-text">
+            Swap in your public 2026 album link when you create it.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2025 February Sucks Soup. Built with ladles of love.</p>
+      <p>Host locally: <code>npm install</code> then <code>npm run dev</code></p>
+    </footer>
+  </body>
+</html>
+
