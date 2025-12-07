@@ -25,7 +25,6 @@ let homeFlow = null;
 
 window.addEventListener('DOMContentLoaded', () => {
   cacheDom();
-  removeAnySelectFallbacks();
   wireTabs();
   wireHomeTriggers();
   wireCtas();
@@ -102,11 +101,5 @@ function wireCtas() {
     document.body.removeChild(link);
     setTimeout(() => URL.revokeObjectURL(link.href), 500);
   });
-}
-
-// Safety: remove any auto-inserted native select dropdown Safari might render
-function removeAnySelectFallbacks() {
-  const rogueSelects = document.querySelectorAll('.site-header select');
-  rogueSelects.forEach((node) => node.remove());
 }
 

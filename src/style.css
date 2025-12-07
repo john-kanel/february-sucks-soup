@@ -119,13 +119,11 @@ main {
 
 .brand {
   border: none;
-  background: white;
-  padding: 1rem 1.75rem;
+  background: transparent;
+  padding: 0;
   text-align: left;
   color: inherit;
   cursor: pointer;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(15, 58, 98, 0.15);
 }
 
 .brand:focus-visible {
@@ -149,24 +147,12 @@ main {
 }
 
 .year-tabs {
-  display: flex !important;
+  display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
-  justify-content: center;
-  visibility: visible !important;
-}
-
-/* Force-hide any native selects that Safari might render/collapse for the year tabs */
-.site-header select {
-  display: none !important;
-  visibility: hidden !important;
 }
 
 .tab {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  visibility: visible !important;
   border: 2px solid transparent;
   background: rgb(255, 255, 255);
   color: var(--sky-powder);
@@ -177,11 +163,6 @@ main {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
   box-shadow: 0 8px 20px rgba(3, 5, 19, 0.4);
-  min-width: 90px;
-  text-align: center;
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
 }
 
 .tab.active {
