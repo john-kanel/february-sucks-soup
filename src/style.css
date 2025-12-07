@@ -119,11 +119,13 @@ main {
 
 .brand {
   border: none;
-  background: transparent;
-  padding: 0;
+  background: #ffffff;
+  padding: 1rem 1.5rem;
   text-align: left;
   color: inherit;
   cursor: pointer;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(14, 58, 98, 0.1);
 }
 
 .brand:focus-visible {
