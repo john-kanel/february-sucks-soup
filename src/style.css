@@ -108,26 +108,24 @@ main {
 }
 
 .site-header {
-  width: 100%;
-  background: #ffffff;
-  padding: 1.5rem 2rem;
+  width: min(1200px, 92vw);
+  margin: 2.5rem auto 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-shadow: 0 4px 12px rgba(14, 58, 98, 0.1);
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .brand {
   border: none;
-  background: transparent;
-  padding: 0;
-  text-align: center;
+  background: #ffffff;
+  padding: 1rem 1.5rem;
+  text-align: left;
   color: inherit;
   cursor: pointer;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(14, 58, 98, 0.1);
 }
 
 .brand:focus-visible {
@@ -136,104 +134,11 @@ main {
 }
 
 .brand h1 {
-  margin: 0;
+  margin: 0.2rem 0 0;
   font-family: 'Fredoka', sans-serif;
   font-size: clamp(2.2rem, 5vw, 3.4rem);
   letter-spacing: 0.02em;
   color: var(--sky-indigo);
-}
-
-.years-dropdown {
-  position: absolute;
-  right: 2rem;
-}
-
-.years-toggle {
-  border: 2px solid rgba(15, 58, 98, 0.15);
-  background: rgb(255, 255, 255);
-  color: var(--sky-indigo);
-  padding: 0.8rem 1.5rem;
-  border-radius: 12px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(14, 58, 98, 0.08);
-}
-
-.years-toggle:hover {
-  border-color: var(--sky-berry);
-  box-shadow: 0 6px 16px rgba(14, 58, 98, 0.12);
-}
-
-.years-toggle[aria-expanded="true"] .dropdown-icon {
-  transform: rotate(180deg);
-}
-
-.dropdown-icon {
-  transition: transform 0.2s ease;
-}
-
-.years-menu {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
-  background: white;
-  border-radius: 12px;
-  border: 2px solid rgba(15, 58, 98, 0.1);
-  box-shadow: 0 8px 24px rgba(14, 58, 98, 0.15);
-  min-width: 140px;
-  overflow: hidden;
-  z-index: 100;
-}
-
-.years-menu[hidden] {
-  display: none;
-}
-
-.year-option {
-  width: 100%;
-  border: none;
-  background: transparent;
-  color: var(--sky-indigo);
-  padding: 0.9rem 1.5rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: left;
-  transition: background 0.2s ease;
-}
-
-.year-option:hover {
-  background: rgba(207, 233, 255, 0.5);
-}
-
-.year-option:not(:last-child) {
-  border-bottom: 1px solid rgba(15, 58, 98, 0.08);
-}
-
-@media (max-width: 768px) {
-  .site-header {
-    padding: 1rem;
-  }
-  
-  .years-dropdown {
-    position: static;
-    margin-left: auto;
-  }
-  
-  .brand {
-    position: static;
-    transform: none;
-    margin-right: auto;
-  }
-  
-  .years-menu {
-    right: 1rem;
-  }
 }
 
 .eyebrow {
@@ -243,7 +148,32 @@ main {
   color: var(--sky-mint);
 }
 
-/* Old year tabs removed - now using dropdown */
+.year-tabs {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.tab {
+  border: 2px solid transparent;
+  background: rgb(255, 255, 255);
+  color: var(--sky-powder);
+  padding: 0.65rem 1.6rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+  box-shadow: 0 8px 20px rgba(3, 5, 19, 0.4);
+}
+
+.tab.active {
+  border-color: var(--sky-honey);
+  color: var(--ink);
+  background: linear-gradient(130deg, var(--sky-honey), var(--sky-berry));
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+}
 
 .hero {
   margin-top: 3rem;
@@ -649,7 +579,15 @@ main {
 }
 
 @media (max-width: 768px) {
-  /* Old site-header and year-tabs styles removed */
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .year-tabs {
+    width: 100%;
+    justify-content: center;
+  }
 
   .hero {
     margin-top: 2rem;
