@@ -31,7 +31,7 @@ form?.addEventListener('submit', async (event) => {
     }
 
     form.reset();
-    showStatus('All set! Check your email for the latest roster.', 'success');
+    showStatus('Looking forward to seeing you there!', 'success');
   } catch (error) {
     console.error(error);
     showStatus('Could not submit right now. Please try again.', 'error');
