@@ -316,13 +316,22 @@ main {
   transform: translateY(-3px);
 }
 
-.recap-card {
+.recap-grid {
   margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.recap-card,
+.countdown-card {
   background: #ffffff;
   border-radius: 24px;
   padding: 2.2rem;
   border: 2px solid rgba(15, 58, 98, 0.08);
   box-shadow: 0 30px 45px rgba(14, 58, 98, 0.12);
+  height: 100%;
 }
 
 .recap-card .card-eyebrow {
@@ -362,6 +371,37 @@ main {
   margin-top: 1rem;
   color: var(--sky-berry);
   font-style: italic;
+}
+
+.countdown-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+}
+
+.countdown-label {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.85rem;
+  color: var(--sky-berry);
+  font-weight: 700;
+}
+
+.countdown-value {
+  margin: 0;
+  font-family: 'Fredoka', sans-serif;
+  font-size: clamp(2.8rem, 7vw, 3.8rem);
+  color: var(--sky-powder);
+  line-height: 1.1;
+}
+
+.countdown-date {
+  margin: 0;
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 1rem;
 }
 
 .itinerary {
