@@ -506,7 +506,7 @@ main {
   padding: 0;
   border-radius: 22px;
   border: 2px solid rgba(15, 58, 98, 0.15);
-  background: #0b2239;
+  background: #ffffff;
   text-decoration: none;
   color: #ffffff;
   transition: all 0.3s ease;
@@ -523,9 +523,11 @@ main {
 .album-cover {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   display: block;
   transition: transform 0.4s ease;
+  background: #ffffff;
 }
 
 .album-link-card:hover .album-cover {
