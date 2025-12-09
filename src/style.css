@@ -338,7 +338,7 @@ main {
   height: 100%;
 }
 
-.recap-card .card-eyebrow {
+.card-eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -348,7 +348,8 @@ main {
   color: var(--sky-berry);
 }
 
-.recap-card h3 {
+.recap-card h3,
+.countdown-card h3 {
   margin-top: 0.5rem;
   font-family: 'Fredoka', sans-serif;
 }
