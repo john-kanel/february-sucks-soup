@@ -178,7 +178,7 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  align-items: start;
+  align-items: stretch;
 }
 
 .hero-invite {
@@ -187,13 +187,17 @@ main {
   padding: 0.75rem;
   border: 3px solid rgba(15, 58, 98, 0.08);
   box-shadow: 0 25px 30px rgba(14, 58, 98, 0.12);
+  display: flex;
+  flex-direction: column;
 }
 
 .hero-invite img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   border-radius: 18px;
+  object-fit: contain;
+  flex: 1;
 }
 
 .hero-stack {
