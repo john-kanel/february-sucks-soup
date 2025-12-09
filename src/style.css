@@ -500,19 +500,18 @@ main {
 }
 
 .album-link-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 3rem 2rem;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
   border-radius: 22px;
   border: 2px solid rgba(15, 58, 98, 0.15);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(207, 233, 255, 0.4));
+  background: #0b2239;
   text-decoration: none;
-  color: var(--sky-indigo);
+  color: #ffffff;
   transition: all 0.3s ease;
   cursor: pointer;
+  aspect-ratio: 4 / 3;
 }
 
 .album-link-card:hover {
@@ -521,25 +520,56 @@ main {
   border-color: var(--sky-berry);
 }
 
-.album-icon {
-  width: 64px;
-  height: 64px;
-  color: var(--sky-berry);
-  margin-bottom: 0.5rem;
+.album-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
 }
 
-.album-link-card h3 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--sky-indigo);
+.album-link-card:hover .album-cover {
+  transform: scale(1.03);
 }
 
-.album-link-card p {
+.album-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(
+    180deg,
+    rgba(2, 11, 20, 0) 0%,
+    rgba(4, 18, 34, 0.85) 100%
+  );
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.album-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--sky-powder);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.album-text h3 {
   margin: 0;
-  font-size: 1rem;
-  color: var(--muted);
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.album-text p {
+  margin: 0.15rem 0 0;
+  font-size: 0.98rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
 }
 
 .site-footer {
