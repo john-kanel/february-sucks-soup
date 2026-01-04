@@ -410,40 +410,40 @@ main {
 }
 
 .countdown-timer {
-  display: flex;
-  gap: 0.75rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.15rem;
   margin: 0.5rem 0;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.countdown-unit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background: linear-gradient(135deg, var(--sky-deep) 0%, #cfe9ff 100%);
   border-radius: 16px;
-  padding: 0.75rem 1rem;
-  min-width: 70px;
+  padding: 0.75rem 1.25rem;
   border: 2px solid rgba(15, 58, 98, 0.1);
   box-shadow: 0 8px 20px rgba(14, 58, 98, 0.1);
 }
 
 .countdown-number {
   font-family: 'Fredoka', sans-serif;
-  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  font-size: clamp(1.4rem, 4vw, 2rem);
   font-weight: 600;
   color: var(--sky-powder);
-  line-height: 1.1;
+  line-height: 1;
+  min-width: 1.5ch;
+  text-align: center;
 }
 
 .countdown-unit-label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
+  font-size: clamp(0.65rem, 2vw, 0.8rem);
   color: var(--sky-berry);
   font-weight: 600;
-  margin-top: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.countdown-separator {
+  font-family: 'Fredoka', sans-serif;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  color: var(--sky-mint);
+  font-weight: 500;
+  margin: 0 0.1rem;
 }
 
 .party-time {
