@@ -107,20 +107,46 @@ function wireCtas() {
 }
 
 function updateCountdown() {
-  const countdownValue = document.querySelector('.countdown-value');
+  const daysEl = document.getElementById('countdown-days');
+  const hoursEl = document.getElementById('countdown-hours');
+  const minutesEl = document.getElementById('countdown-minutes');
+  const secondsEl = document.getElementById('countdown-seconds');
   const countdownDate = document.querySelector('.countdown-date');
-  if (!countdownValue || !countdownDate) return;
+  const countdownTimer = document.querySelector('.countdown-timer');
+  
+  if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
 
-  countdownDate.textContent = PARTY_DATE_LABEL;
-
-  const now = new Date();
-  const diffMs = PARTY_DATE.getTime() - now.getTime();
-  if (diffMs <= 0) {
-    countdownValue.textContent = 'Party time!';
-    return;
+  if (countdownDate) {
+    countdownDate.textContent = PARTY_DATE_LABEL;
   }
 
-  const days = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-  countdownValue.textContent = `${days} day${days === 1 ? '' : 's'}`;
+  function tick() {
+    const now = new Date();
+    const diffMs = PARTY_DATE.getTime() - now.getTime();
+    
+    if (diffMs <= 0) {
+      // Party time! Replace timer with message
+      if (countdownTimer) {
+        countdownTimer.innerHTML = '<p class="party-time">🎉 Party time! 🎉</p>';
+      }
+      return;
+    }
+
+    // Calculate time units
+    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
+
+    // Update the display (pad with zeros for consistent look)
+    daysEl.textContent = String(days).padStart(2, '0');
+    hoursEl.textContent = String(hours).padStart(2, '0');
+    minutesEl.textContent = String(minutes).padStart(2, '0');
+    secondsEl.textContent = String(seconds).padStart(2, '0');
+  }
+
+  // Run immediately, then every second
+  tick();
+  setInterval(tick, 1000);
 }
 
