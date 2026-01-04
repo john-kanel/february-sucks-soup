@@ -22,12 +22,15 @@ Remember: hydrate between ladles!`;
 let tabs = [];
 let yearStages = [];
 let homeFlow = null;
+const PARTY_DATE = new Date('2026-02-27T19:00:00');
+const PARTY_DATE_LABEL = 'February 27, 2026 @ 7:00 PM';
 
 window.addEventListener('DOMContentLoaded', () => {
   cacheDom();
   wireTabs();
   wireHomeTriggers();
   wireCtas();
+  updateCountdown();
   showHome();
 });
 
@@ -101,5 +104,23 @@ function wireCtas() {
     document.body.removeChild(link);
     setTimeout(() => URL.revokeObjectURL(link.href), 500);
   });
+}
+
+function updateCountdown() {
+  const countdownValue = document.querySelector('.countdown-value');
+  const countdownDate = document.querySelector('.countdown-date');
+  if (!countdownValue || !countdownDate) return;
+
+  countdownDate.textContent = PARTY_DATE_LABEL;
+
+  const now = new Date();
+  const diffMs = PARTY_DATE.getTime() - now.getTime();
+  if (diffMs <= 0) {
+    countdownValue.textContent = 'Party time!';
+    return;
+  }
+
+  const days = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+  countdownValue.textContent = `${days} day${days === 1 ? '' : 's'}`;
 }
 
