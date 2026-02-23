@@ -1,1 +1,27 @@
-[]
+[
+  {
+    "name": "Test User",
+    "guests": 2,
+    "submittedAt": "2026-02-23T21:14:18.251Z"
+  },
+  {
+    "name": "James Kearney",
+    "guests": 1,
+    "submittedAt": "2026-02-23T21:14:51.454Z"
+  },
+  {
+    "name": "Test User",
+    "guests": 2,
+    "submittedAt": "2026-02-23T21:14:54.791Z"
+  },
+  {
+    "name": "Test User",
+    "guests": 2,
+    "submittedAt": "2026-02-23T21:15:20.867Z"
+  },
+  {
+    "name": "Test User",
+    "guests": 2,
+    "submittedAt": "2026-02-23T21:16:47.602Z"
+  }
+]
