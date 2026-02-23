@@ -135,7 +135,7 @@ app.post('/api/rsvps', async (req, res) => {
     if (!payload) {
       return res
         .status(400)
-        .json({ error: 'Name, number attending, and soup are required.' });
+        .json({ error: 'Name and number attending are required.' });
     }
 
     const list = await readRsvps();
@@ -256,30 +256,27 @@ async function readRsvps() {
 
 function normalizeRsvp(body = {}) {
   const name = String(body.name ?? '').trim();
-  const soup = String(body.soup ?? '').trim();
   const guests = Number(body.guests);
-  if (!name || !soup || Number.isNaN(guests) || guests < 1) {
+  if (!name || Number.isNaN(guests) || guests < 1) {
     return null;
   }
   return {
     name,
-    soup,
     guests,
     submittedAt: new Date().toISOString()
   };
 }
 
 async function sendRsvpEmail(list, latest) {
-  const subject = `[RSVP] ${latest.name} is bringing ${latest.soup}`;
+  const subject = `[RSVP] ${latest.name} is coming! (party of ${latest.guests})`;
   const rows = list
     .map(
       (entry, idx) =>
-        `${idx + 1}. ${entry.name} — ${entry.soup} (party of ${entry.guests})`
+        `${idx + 1}. ${entry.name} (party of ${entry.guests})`
     )
     .join('\n');
   const text = `
 New RSVP from ${latest.name}
-Soup: ${latest.soup}
 Guests: ${latest.guests}
 Submitted: ${new Date(latest.submittedAt).toLocaleString()}
 
@@ -290,14 +287,13 @@ ${rows}
   const htmlRows = list
     .map(
       (entry, idx) =>
-        `<li><strong>${idx + 1}.</strong> ${entry.name} — ${entry.soup} (party of ${entry.guests})</li>`
+        `<li><strong>${idx + 1}.</strong> ${entry.name} (party of ${entry.guests})</li>`
     )
     .join('');
 
   const html = `
     <h2>New RSVP: ${latest.name}</h2>
-    <p><strong>Soup:</strong> ${latest.soup}<br/>
-    <strong>Guests:</strong> ${latest.guests}<br/>
+    <p><strong>Guests:</strong> ${latest.guests}<br/>
     <strong>Submitted:</strong> ${new Date(latest.submittedAt).toLocaleString()}</p>
     <h3>Current roster</h3>
     <ul>${htmlRows}</ul>
