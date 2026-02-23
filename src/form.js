@@ -8,11 +8,10 @@ form?.addEventListener('submit', async (event) => {
   const data = new FormData(form);
   const payload = {
     name: data.get('name')?.toString().trim(),
-    guests: Number(data.get('guests')),
-    soup: data.get('soup')?.toString().trim()
+    guests: Number(data.get('guests'))
   };
 
-  if (!payload.name || !payload.guests || !payload.soup) {
+  if (!payload.name || !payload.guests) {
     showStatus('Please fill out every field.', 'error');
     return;
   }
