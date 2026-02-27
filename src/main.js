@@ -24,8 +24,11 @@ let yearStages = [];
 let homeFlow = null;
 const PARTY_DATE = new Date('2026-02-27T19:00:00');
 const PARTY_DATE_LABEL = 'February 27, 2026 @ 7:00 PM';
-// Feb 27, 2026 @ 7:00 PM CST (UTC-6) => 2026-02-28 01:00:00 UTC
-const SHOP_RELEASE_AT_MS = Date.UTC(2026, 1, 28, 1, 0, 0);
+// Visible window in CST:
+// Start: Feb 27, 2026 @ 7:00 PM CST (UTC-6) => 2026-02-28 01:00:00 UTC
+// End:   Feb 28, 2026 @ 1:00 AM CST (UTC-6) => 2026-02-28 07:00:00 UTC
+const SHOP_RELEASE_START_MS = Date.UTC(2026, 1, 28, 1, 0, 0);
+const SHOP_RELEASE_END_MS = Date.UTC(2026, 1, 28, 7, 0, 0);
 const SHOP_PREVIEW_MINUTES = 30;
 const SHOP_PREVIEW_UNTIL_KEY = 'fss-shop-preview-until';
 const SHOP_PREVIEW_COOKIE_KEY = 'fss_shop_preview_until';
@@ -66,7 +69,9 @@ function cacheDom() {
 
 function isShopVisible() {
   const nowMs = Date.now();
-  if (nowMs >= SHOP_RELEASE_AT_MS) return true;
+  if (nowMs >= SHOP_RELEASE_START_MS && nowMs < SHOP_RELEASE_END_MS) {
+    return true;
+  }
 
   const previewUntilMs = getOrCreatePreviewWindowEnd();
   return nowMs <= previewUntilMs;
@@ -87,8 +92,8 @@ function getOrCreatePreviewWindowEnd() {
 }
 
 function clampPreviewUntil(valueMs) {
-  // Never allow preview to run beyond the official release.
-  return Math.min(valueMs, SHOP_RELEASE_AT_MS - 1);
+  // Never allow preview to run into the scheduled release window.
+  return Math.min(valueMs, SHOP_RELEASE_START_MS - 1);
 }
 
 function readSavedPreviewUntil() {
@@ -105,7 +110,7 @@ function readSavedPreviewUntil() {
 
 function savePreviewUntil(valueMs) {
   writeLocalStorage(SHOP_PREVIEW_UNTIL_KEY, String(valueMs));
-  writeCookie(SHOP_PREVIEW_COOKIE_KEY, String(valueMs), SHOP_RELEASE_AT_MS);
+  writeCookie(SHOP_PREVIEW_COOKIE_KEY, String(valueMs), SHOP_RELEASE_START_MS);
 }
 
 function readLocalStorage(key) {
