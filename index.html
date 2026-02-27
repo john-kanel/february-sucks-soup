@@ -37,6 +37,17 @@
           type="button"
           role="tab"
           aria-selected="false"
+          aria-controls="panel-shop"
+          data-tab="shop"
+          data-shop-tab
+        >
+          Shop
+        </button>
+        <button
+          class="tab"
+          type="button"
+          role="tab"
+          aria-selected="false"
           aria-controls="panel-2026"
           data-tab="2026"
         >
@@ -180,6 +191,127 @@
         -->
 
       </div>
+
+      <section
+        class="year-stage"
+        id="panel-shop"
+        data-year="shop"
+        role="tabpanel"
+        aria-hidden="true"
+        data-shop-stage
+      >
+        <button class="back-home" type="button" data-back-home>
+          ← Back to party details
+        </button>
+        <header>
+          <p class="eyebrow">February Sucks Shop</p>
+          <h2>Limited Collection</h2>
+        </header>
+
+        <section class="shop-grid" aria-label="Soup party products">
+          <article class="product-card">
+            <div class="product-image-wrap">
+              <img
+                class="product-image"
+                src="/The Brock Hoodie.png"
+                alt="The Brock Hoodie"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-body">
+              <h3>The Brock Hoodie</h3>
+              <p class="product-price">$25,000.00</p>
+              <label class="product-option">
+                Size
+                <select aria-label="Choose size for The Brock Hoodie">
+                  <option value="" selected disabled>Select size</option>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                  <option>XL</option>
+                  <option>2XL</option>
+                </select>
+              </label>
+              <button class="product-button" type="button">Add to cart</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image-wrap">
+              <img
+                class="product-image"
+                src="/The Riley Hoodie.png"
+                alt="The Riley Hoodie"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-body">
+              <h3>The Riley Hoodie</h3>
+              <p class="product-price">$25,000.00</p>
+              <label class="product-option">
+                Size
+                <select aria-label="Choose size for The Riley Hoodie">
+                  <option value="" selected disabled>Select size</option>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                  <option>XL</option>
+                  <option>2XL</option>
+                </select>
+              </label>
+              <button class="product-button" type="button">Add to cart</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image-wrap">
+              <img
+                class="product-image"
+                src="/The Seth Tumbler.png"
+                alt="The Seth Tumbler"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-body">
+              <h3>The Seth Tumbler</h3>
+              <p class="product-price">$25,000.00</p>
+              <button class="product-button" type="button">Add to cart</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image-wrap">
+              <img
+                class="product-image"
+                src="/The Soup Journal.png"
+                alt="The Soup Journal"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-body">
+              <h3>The Soup Journal</h3>
+              <p class="product-price">$25,000.00</p>
+              <button class="product-button" type="button">Add to cart</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-image-wrap">
+              <img
+                class="product-image"
+                src="/The John Onesie.png"
+                alt="The John Onesie"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-body">
+              <h3>The John Onesie</h3>
+              <p class="product-price">$25,000.00</p>
+              <button class="product-button" type="button">Add to cart</button>
+            </div>
+          </article>
+        </section>
+      </section>
 
       <section
         class="year-stage"
