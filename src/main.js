@@ -29,13 +29,24 @@ const SHOP_RELEASE_AT_MS = Date.UTC(2026, 1, 28, 1, 0, 0);
 const SHOP_PREVIEW_MINUTES = 30;
 const SHOP_PREVIEW_UNTIL_KEY = 'fss-shop-preview-until';
 const SHOP_PREVIEW_COOKIE_KEY = 'fss_shop_preview_until';
+const SHOP_PRODUCTS = {
+  'brock-hoodie': { name: 'The Brock Hoodie', price: 25000, requiresSize: true },
+  'riley-hoodie': { name: 'The Riley Hoodie', price: 25000, requiresSize: true },
+  'seth-tumbler': { name: 'The Seth Tumbler', price: 25000, requiresSize: false },
+  'soup-journal': { name: 'The Soup Journal', price: 25000, requiresSize: false },
+  'john-onesie': { name: 'The John Onesie', price: 25000, requiresSize: false }
+};
+
+let shopView = 'catalog';
+let shopCart = [];
+let checkoutDetails = null;
 
 window.addEventListener('DOMContentLoaded', () => {
   cacheDom();
   wireTabs();
   wireHomeTriggers();
   wireCtas();
-  wireShopButtons();
+  wireShopFlow();
   updateCountdown();
   showHome();
 });
@@ -172,6 +183,9 @@ function showYear(year) {
     tab.classList.toggle('active', isActive);
     tab.setAttribute('aria-selected', String(isActive));
   });
+  if (year === 'shop') {
+    renderShopUi();
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -196,13 +210,268 @@ function wireCtas() {
   });
 }
 
-function wireShopButtons() {
-  const productButtons = document.querySelectorAll('.product-button');
+function wireShopFlow() {
+  const shopStage = document.querySelector('[data-shop-stage]');
+  if (!shopStage) return;
+
+  const productButtons = shopStage.querySelectorAll('[data-add-product]');
   productButtons.forEach((button) => {
     button.addEventListener('click', () => {
-      window.alert('Added to cart (demo). Checkout is coming soon.');
+      const productId = button.dataset.addProduct;
+      const product = SHOP_PRODUCTS[productId];
+      if (!product) return;
+
+      let size = '';
+      const sizeSelectId = button.dataset.sizeSelect;
+      if (sizeSelectId) {
+        const sizeSelect = document.getElementById(sizeSelectId);
+        size = sizeSelect?.value?.trim() ?? '';
+        if (product.requiresSize && !size) {
+          window.alert('Please choose a size first.');
+          return;
+        }
+      }
+
+      addToCart(productId, size);
+      shopView = 'cart';
+      renderShopUi();
     });
   });
+
+  const navButtons = shopStage.querySelectorAll('[data-shop-nav]');
+  navButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const targetView = button.dataset.shopNav;
+      if (!targetView) return;
+      navigateShop(targetView);
+    });
+  });
+
+  const checkoutForm = shopStage.querySelector('[data-checkout-form]');
+  checkoutForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!shopCart.length) {
+      shopView = 'catalog';
+      renderShopUi();
+      return;
+    }
+
+    const formData = new FormData(checkoutForm);
+    checkoutDetails = {
+      fullName: String(formData.get('fullName') || '').trim(),
+      email: String(formData.get('email') || '').trim(),
+      address: String(formData.get('address') || '').trim(),
+      city: String(formData.get('city') || '').trim(),
+      state: String(formData.get('state') || '').trim(),
+      zip: String(formData.get('zip') || '').trim()
+    };
+
+    if (Object.values(checkoutDetails).some((value) => !value)) {
+      window.alert('Please fill in all checkout details.');
+      return;
+    }
+
+    shopView = 'review';
+    renderShopUi();
+  });
+
+  const paymentForm = shopStage.querySelector('[data-payment-form]');
+  paymentForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!shopCart.length) {
+      shopView = 'catalog';
+      renderShopUi();
+      return;
+    }
+
+    const formData = new FormData(paymentForm);
+    const cardNumber = String(formData.get('cardNumber') || '').trim();
+    const expiry = String(formData.get('expiry') || '').trim();
+    const cvv = String(formData.get('cvv') || '').trim();
+
+    if (!cardNumber || !expiry || !cvv) {
+      window.alert('Please fill in your fake payment details.');
+      return;
+    }
+
+    const orderNumber = `FSS-${String(Math.floor(Math.random() * 1000000)).padStart(6, '0')}`;
+    const orderNumberEl = shopStage.querySelector('[data-order-number]');
+    if (orderNumberEl) orderNumberEl.textContent = orderNumber;
+
+    shopCart = [];
+    checkoutDetails = null;
+    shopView = 'confirmation';
+    paymentForm.reset();
+    renderShopUi();
+  });
+
+  const restartButton = shopStage.querySelector('[data-shop-restart]');
+  restartButton?.addEventListener('click', () => {
+    shopView = 'catalog';
+    renderShopUi();
+  });
+
+  const cartList = shopStage.querySelector('[data-cart-list]');
+  cartList?.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-cart-action]');
+    if (!button) return;
+
+    const action = button.dataset.cartAction;
+    const key = button.dataset.cartKey;
+    if (!action || !key) return;
+
+    if (action === 'increase') {
+      updateCartItemQuantity(key, 1);
+    } else if (action === 'decrease') {
+      updateCartItemQuantity(key, -1);
+    } else if (action === 'remove') {
+      shopCart = shopCart.filter((item) => item.key !== key);
+    }
+
+    renderShopUi();
+  });
+
+  renderShopUi();
+}
+
+function navigateShop(targetView) {
+  if (targetView === 'checkout' && !shopCart.length) {
+    window.alert('Your cart is empty.');
+    shopView = 'catalog';
+  } else if (targetView === 'review' && !checkoutDetails) {
+    window.alert('Please complete checkout details first.');
+    shopView = 'checkout';
+  } else {
+    shopView = targetView;
+  }
+  renderShopUi();
+}
+
+function addToCart(productId, size = '') {
+  const key = `${productId}::${size || 'nosize'}`;
+  const existing = shopCart.find((item) => item.key === key);
+  if (existing) {
+    existing.quantity += 1;
+    return;
+  }
+
+  const product = SHOP_PRODUCTS[productId];
+  if (!product) return;
+
+  shopCart.push({
+    key,
+    productId,
+    size,
+    quantity: 1
+  });
+}
+
+function updateCartItemQuantity(key, delta) {
+  shopCart = shopCart
+    .map((item) => {
+      if (item.key !== key) return item;
+      return { ...item, quantity: item.quantity + delta };
+    })
+    .filter((item) => item.quantity > 0);
+}
+
+function getCartCount() {
+  return shopCart.reduce((sum, item) => sum + item.quantity, 0);
+}
+
+function getCartSubtotal() {
+  return shopCart.reduce((sum, item) => {
+    const product = SHOP_PRODUCTS[item.productId];
+    return sum + (product ? product.price * item.quantity : 0);
+  }, 0);
+}
+
+function formatMoney(value) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(value);
+}
+
+function renderShopUi() {
+  const shopStage = document.querySelector('[data-shop-stage]');
+  if (!shopStage) return;
+
+  const allViews = shopStage.querySelectorAll('[data-shop-view]');
+  allViews.forEach((view) => {
+    view.classList.toggle('active', view.dataset.shopView === shopView);
+  });
+
+  const countEl = shopStage.querySelector('[data-cart-count]');
+  if (countEl) countEl.textContent = String(getCartCount());
+
+  const subtotalEl = shopStage.querySelector('[data-cart-subtotal]');
+  if (subtotalEl) subtotalEl.textContent = formatMoney(getCartSubtotal());
+
+  renderCartList(shopStage);
+  renderReviewDetails(shopStage);
+  renderShopStepper(shopStage);
+}
+
+function renderCartList(shopStage) {
+  const cartList = shopStage.querySelector('[data-cart-list]');
+  if (!cartList) return;
+
+  if (!shopCart.length) {
+    cartList.innerHTML = '<p class="shop-empty">Your cart is empty.</p>';
+    return;
+  }
+
+  cartList.innerHTML = shopCart
+    .map((item) => {
+      const product = SHOP_PRODUCTS[item.productId];
+      if (!product) return '';
+      const sizeLabel = item.size ? ` · Size: ${item.size}` : '';
+      return `
+        <article class="cart-item">
+          <div>
+            <h4>${product.name}</h4>
+            <p>${formatMoney(product.price)}${sizeLabel}</p>
+          </div>
+          <div class="cart-controls">
+            <button type="button" data-cart-action="decrease" data-cart-key="${item.key}">-</button>
+            <span>${item.quantity}</span>
+            <button type="button" data-cart-action="increase" data-cart-key="${item.key}">+</button>
+            <button type="button" data-cart-action="remove" data-cart-key="${item.key}">Remove</button>
+          </div>
+        </article>
+      `;
+    })
+    .join('');
+}
+
+function renderReviewDetails(shopStage) {
+  const addressEl = shopStage.querySelector('[data-review-address]');
+  const totalEl = shopStage.querySelector('[data-review-total]');
+
+  if (addressEl) {
+    if (!checkoutDetails) {
+      addressEl.textContent = 'Not entered';
+    } else {
+      addressEl.textContent =
+        `${checkoutDetails.fullName}, ${checkoutDetails.address}, ${checkoutDetails.city}, ${checkoutDetails.state} ${checkoutDetails.zip}`;
+    }
+  }
+  if (totalEl) totalEl.textContent = formatMoney(getCartSubtotal());
+}
+
+function renderShopStepper(shopStage) {
+  const stepperEl = shopStage.querySelector('[data-shop-stepper]');
+  if (!stepperEl) return;
+
+  const stepLabels = {
+    catalog: 'Catalog',
+    cart: 'Cart',
+    checkout: 'Checkout',
+    review: 'Review',
+    confirmation: 'Done'
+  };
+  stepperEl.textContent = `Current step: ${stepLabels[shopView] || 'Catalog'}`;
 }
 
 function updateCountdown() {
