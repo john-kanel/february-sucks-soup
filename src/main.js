@@ -32,7 +32,7 @@ const SHOP_RELEASE_END_MS = Date.UTC(2026, 1, 28, 7, 0, 0);
 const SHOP_PREVIEW_MINUTES = 30;
 const SHOP_PREVIEW_UNTIL_KEY = 'fss-shop-preview-until';
 const SHOP_PREVIEW_COOKIE_KEY = 'fss_shop_preview_until';
-const SHOP_FORCE_HIDDEN = true;
+const SHOP_FORCE_HIDDEN = false;
 const SHOP_PRODUCTS = {
   'brock-hoodie': { name: 'The Brock Hoodie', price: 25000, requiresSize: true },
   'riley-hoodie': { name: 'The Riley Hoodie', price: 25000, requiresSize: true },
