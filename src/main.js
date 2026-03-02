@@ -51,6 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
   wireHomeTriggers();
   wireCtas();
   wireShopFlow();
+  wireAnnouncementModal();
   updateCountdown();
   showHome();
 });
@@ -480,6 +481,30 @@ function renderShopStepper(shopStage) {
     confirmation: 'Done'
   };
   stepperEl.textContent = `Current step: ${stepLabels[shopView] || 'Catalog'}`;
+}
+
+function wireAnnouncementModal() {
+  const modal = document.querySelector('[data-announcement-modal]');
+  if (!modal) return;
+
+  const closeTargets = modal.querySelectorAll('[data-announcement-close]');
+  const closeModal = () => {
+    modal.setAttribute('hidden', 'hidden');
+    document.body.classList.remove('modal-open');
+  };
+
+  closeTargets.forEach((target) => {
+    target.addEventListener('click', closeModal);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !modal.hasAttribute('hidden')) {
+      closeModal();
+    }
+  });
+
+  modal.removeAttribute('hidden');
+  document.body.classList.add('modal-open');
 }
 
 function updateCountdown() {

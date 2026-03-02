@@ -36,6 +36,10 @@ body {
   position: relative;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 body::before {
   content: '';
   position: fixed;
@@ -884,6 +888,80 @@ main {
   border-radius: 0.4rem;
 }
 
+.announcement-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.announcement-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 22, 38, 0.58);
+}
+
+.announcement-panel {
+  position: relative;
+  width: min(540px, 100%);
+  background: #ffffff;
+  border-radius: 18px;
+  border: 2px solid rgba(15, 58, 98, 0.12);
+  box-shadow: 0 25px 50px rgba(10, 35, 60, 0.3);
+  padding: 1.2rem 1.2rem 1.35rem;
+  z-index: 1;
+}
+
+.announcement-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  border: none;
+  border-radius: 999px;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background: #eef5fc;
+  color: #15466f;
+  cursor: pointer;
+}
+
+.announcement-eyebrow {
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--sky-berry);
+}
+
+.announcement-panel h2 {
+  margin: 0;
+  color: var(--sky-indigo);
+  font-family: 'Fredoka', sans-serif;
+  font-size: clamp(1.25rem, 3vw, 1.8rem);
+}
+
+.announcement-panel p {
+  margin: 0.75rem 0 0;
+  color: var(--text);
+}
+
+.announcement-cta {
+  margin-top: 1rem;
+  border: none;
+  border-radius: 10px;
+  padding: 0.72rem 1rem;
+  background: #1f5d96;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .form-layout {
   width: min(800px, 95vw);
   margin: 3rem auto 4rem;
@@ -981,6 +1059,14 @@ main {
 
   .playbook-grid {
     grid-template-columns: 1fr;
+  }
+
+  .announcement-panel {
+    padding: 1rem 1rem 1.1rem;
+  }
+
+  .announcement-cta {
+    width: 100%;
   }
 }
 
