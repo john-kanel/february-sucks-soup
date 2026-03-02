@@ -487,15 +487,24 @@ function wireAnnouncementModal() {
   const modal = document.querySelector('[data-announcement-modal]');
   if (!modal) return;
 
-  const closeTargets = modal.querySelectorAll('[data-announcement-close]');
+  let isClosed = false;
   const closeModal = () => {
+    if (isClosed) return;
+    isClosed = true;
     modal.setAttribute('hidden', 'hidden');
     document.body.classList.remove('modal-open');
   };
 
-  closeTargets.forEach((target) => {
-    target.addEventListener('click', closeModal);
-  });
+  const handleCloseInteraction = (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target?.closest('[data-announcement-close]')) return;
+    event.preventDefault();
+    closeModal();
+  };
+
+  // Listen for both click and pointer events to improve reliability on mobile.
+  modal.addEventListener('click', handleCloseInteraction);
+  modal.addEventListener('pointerup', handleCloseInteraction);
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && !modal.hasAttribute('hidden')) {

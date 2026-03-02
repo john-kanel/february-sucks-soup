@@ -928,6 +928,7 @@ main {
   background: #eef5fc;
   color: #15466f;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .announcement-eyebrow {
@@ -960,6 +961,7 @@ main {
   color: #ffffff;
   font-weight: 700;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .form-layout {
